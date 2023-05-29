@@ -1,0 +1,10 @@
+
+span{
+  width:30px;
+  height: 30px;
+  line-height: 30px;
+  border: solid 1px #ccc;
+  display: inline-block;
+  text-align: center;
+  font-size: 12px;
+}
