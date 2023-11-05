@@ -1,19 +1,26 @@
 import { Button } from 'antd'
 import { useEffect, useState } from 'react';
 import store from '../reducers/store'
-import { sedAciton } from '../reducers/action/index'
+import { sedAciton, addfalse } from '../reducers/action/index'
+import { useSelector } from 'react-redux'
 
 const Head = () => {
   // const [count, setcount] = useState()
   // useEffect(() => {
   //   // setcount(3)
   // })
-  const hadeclick = () => {
-    store.dispatch(sedAciton())
+  const todos = useSelector(state => state.todos);
+  const hadeclick = (id) => {
+    store.dispatch(addfalse(id))
   }
   return (
     <>
-      <div onClick={() => { hadeclick() }}>{store.getState().value}这是头部<Button type="primary">Button</Button></div>
+      {todos.map(item => {
+        return <div key={item.id}>
+          <li> {item.text}</li>
+          <div onClick={() => { hadeclick(item.id) }}><Button type="primary">Button</Button></div >
+        </div>
+      })}
     </>
   );
 };
