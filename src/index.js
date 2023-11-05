@@ -4,12 +4,15 @@ import App from "./App";
 // 先导入 antd 样式文件
 import "antd/dist/reset.css"
 import "./asstes/style/common.scss";
+import { Provider } from 'react-redux'
+import store from '../src/reducers/store.js'
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+    <Provider store={store}>
+
+        <App />
+    </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

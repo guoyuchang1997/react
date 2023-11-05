@@ -2,6 +2,10 @@ const Latouy = () => {
   return (
     <>
       <div>Layout</div>
+      <div>
+
+        
+      </div>
     </>
   );
 };
