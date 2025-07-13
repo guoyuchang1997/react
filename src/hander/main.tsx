@@ -9,7 +9,10 @@ const MyComponent = () => {
   }
   return (
     <div className="demo">
-   组件1 <button onClick={change}>点击</button>
+   组件1 <button onClick={change}>点击修改name</button>
+   组件1 <button onClick={()=>{
+    Store.Head.update('IStore.num',`点击修改${+new Date()}`)
+   }}>点击修改num</button>
     </div>
   );
 };
