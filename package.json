@@ -140,5 +140,11 @@
     "presets": [
       "react-app"
     ]
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.8",
+    "@vitejs/plugin-react": "^4.6.0",
+    "tslib": "^2.8.1",
+    "typescript": "^5.8.3"
   }
 }

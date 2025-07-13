@@ -1,7 +1,8 @@
-import { IHome } from '../types/store.js';
+/* eslint-disable react-hooks/rules-of-hooks */
+import { IHome } from '../types/store';
 import { Dispatch, SetStateAction, useState, useEffect } from 'react';
 import { create } from 'zustand';
-import { eventBus } from './eventBus.js';
+import { eventBus } from './eventBus';
 
 
 // 辅助类型，用于递归地键入嵌套对象路径
@@ -100,7 +101,7 @@ function getModuleStore<E extends object>(moduleName: string) {
 /** 数据存储 */
 export const Store = {
   /** 页头 */
-  Head: getModuleStore<IHome>('IHead.IStore'),
+  Head:  getModuleStore<IHome['IHead']>('IHead.IStore')
 }
 {/* //@ts-ignore
 window._Store = Store; */}
