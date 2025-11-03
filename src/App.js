@@ -1,7 +1,8 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Login from "./pages/Login";
 import Layout from "./pages/Layout";
-import Hander from "./hander/head";
+// import Hander from "./hander/head";
+import Main from "./pages/Main";
 function App() {
   return (
     <>
@@ -12,7 +13,7 @@ function App() {
             <Route path="/login" component={Login}></Route>
 
             <Route>
-              <Hander />
+              <Main></Main>
             </Route>
           </Switch>
         </div>

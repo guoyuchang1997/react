@@ -6,15 +6,14 @@ import { sedAciton, addfalse } from '../reducers/action/index'
 import { useSelector } from 'react-redux'
 import Main from './Main'
 import Main2 from './Main2'
-import Main3 from './Main3'
 import Main4 from './Main34444'
 const App = () => {
   return (
     <div className="demo">
-     <Main />
-     <Main2 />
-     <Main3 />
-     <Main4 />
+      <div>测试0022</div>
+      <Main />
+      <Main2 />
+      <Main4 />
     </div>
   );
 };
