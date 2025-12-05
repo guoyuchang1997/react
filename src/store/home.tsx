@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import { IHome } from '../types/store';
 import { Dispatch, SetStateAction, useState, useEffect } from 'react';
 import { create } from 'zustand';
@@ -51,7 +50,7 @@ const useStore = create<StoreState>((set, get) => ({
       return newState;
     });
   },
-get: <T,>(path: string): T | undefined =>{
+  get: <T,>(path: string): T | undefined => {
     const keys = path.split('.');
     let currentState = get();
     for (const key of keys) {
@@ -80,7 +79,7 @@ function getModuleStore<E extends object>(moduleName: string) {
       })
 
       useEffect(() => {
-        let oldValue:any;
+        let oldValue: any;
         const unsubscribe = useStore.subscribe((newState) => {
           const newValue = useStore.getState().get<PathType<E, T>>(`${moduleName}.${path}`);
           if (newValue !== undefined && newValue !== oldValue) {
@@ -101,7 +100,7 @@ function getModuleStore<E extends object>(moduleName: string) {
 /** 数据存储 */
 export const Store = {
   /** 页头 */
-  Head:  getModuleStore<IHome['IHead']>('IHead.IStore')
+  Head: getModuleStore<IHome['IHead']>('IHead.IStore')
 }
 {/* //@ts-ignore
 window._Store = Store; */}

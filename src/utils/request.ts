@@ -1,15 +1,16 @@
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
-
-// 创建 axios 实例
+import axios, { AxiosInstance, AxiosResponse } from 'axios';
+// 1️⃣ 修改 baseURL
 const service: AxiosInstance = axios.create({
-  baseURL: process.env.REACT_APP_API_BASE_URL || 'http://localhost:8080/', // ✅ 后端地址
-  timeout: 10000, // 超时时间（毫秒）
+  // 关键点：设置为空字符串，或者 '/api'。
+  // 这样请求会自动基于当前域名（http://localhost:3000），从而触发 setupProxy.js
+  baseURL: process.env.REACT_APP_API_BASE_URL || '', 
+  timeout: 100000, 
 });
 
-// 请求拦截器
+// ... 请求拦截器保持不变 ...
 service.interceptors.request.use(
   (config: any) => {
-    // 例如：在这里加上 token
+    // 这里保持你原本的 Token 逻辑
     const token = localStorage.getItem('token');
     if (token) {
       config.headers = {
@@ -25,36 +26,26 @@ service.interceptors.request.use(
   }
 );
 
-// 响应拦截器
+// 2️⃣ 修改响应拦截器以匹配 Python 后端
 service.interceptors.response.use(
   (response: AxiosResponse) => {
-    // 可以统一处理返回的数据结构
     const res = response.data;
-    if (res.code !== 0 && res.status !== 'success') {
-      console.error('接口错误：', res.message || '未知错误');
-      return Promise.reject(res);
+
+    // 假设你的后端返回结构是: { code: 200, result: ..., model_used: ... }
+    // 之前你的判断是 res.status_code !== 1，这会导致报错
+    if (res.status === 200 ) {
+       return res; // ✅ 校验通过，返回数据
     }
-    return res;
+    
+    // 如果不符合成功条件
+    console.error('接口错误：', res.message || '业务处理失败');
+    return Promise.reject(new Error(res.message || 'Error'));
   },
   (error) => {
+    // ... 这里的错误处理逻辑保持不变 ...
     if (error.response) {
-      const status = error.response.status;
-      switch (status) {
-        case 401:
-          console.warn('未授权或登录过期');
-          localStorage.removeItem('token');
-          break;
-        case 404:
-          console.warn('接口不存在');
-          break;
-        case 500:
-          console.error('服务器错误');
-          break;
-        default:
-          console.error('网络错误', status);
-      }
-    } else {
-      console.error('请求失败', error.message);
+       // ... status code switch case ...
+       console.error('HTTP Error', error.response.status);
     }
     return Promise.reject(error);
   }

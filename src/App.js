@@ -1,8 +1,9 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Login from "./pages/Login";
 import Layout from "./pages/Layout";
-// import Hander from "./hander/head";
-import Main from "./pages/Main";
+import Hander from "./hander/head";
+import AiText from './pages/AiText'
+// import Main from "./pages/Main";
 function App() {
   return (
     <>
@@ -13,7 +14,7 @@ function App() {
             <Route path="/login" component={Login}></Route>
 
             <Route>
-              <Main></Main>
+              <AiText></AiText>
             </Route>
           </Switch>
         </div>
