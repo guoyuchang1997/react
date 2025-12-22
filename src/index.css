@@ -1,0 +1,24 @@
+/* 定义变量 */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #333333;
+  --sider-bg: #f9f9f9;
+}
+
+/* 深色模式覆盖 */
+[data-theme='dark'] {
+  --bg-color: #121212;
+  /* GPT 深色背景 */
+  --text-color: #ececec;
+  --sider-bg: #1a1a1a;
+}
+
+/* 应用变量 */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* 如果有 Antd，Antd 5 需要 ConfigProvider 配合，
+   但如果只是想简单的背景变黑，上述 CSS 已经够了 */

@@ -1,0 +1,232 @@
+/* --- 整体布局 --- */
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  background-color: #fff;
+  /* 纯白背景，或者用 #f9f9f9 */
+}
+
+.gpt-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  /* 占满全屏 */
+  max-width: 900px;
+  /* 限制最大宽度，类似 GPT 网页版 */
+  margin: 0 auto;
+  position: relative;
+}
+
+/* --- 顶部 --- */
+.gpt-header {
+  padding-top: 10px;
+  flex-shrink: 0;
+}
+
+/* 去掉 Tabs 下面的那根灰线 */
+.gpt-tabs .ant-tabs-nav::before {
+  border-bottom: none !important;
+}
+
+/* --- 中间工作区 --- */
+.gpt-workspace {
+  flex: 1;
+  overflow: hidden;
+  /* 内部滚动 */
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-bottom: 50px;
+}
+
+.chat-content-area {
+  flex: 1;
+  overflow-y: auto;
+  /* 让聊天记录滚动 */
+  padding: 20px 0 40px 0;
+  /* 底部留白给输入框 */
+  scrollbar-width: none;
+  /* 隐藏滚动条(Firefox) */
+}
+
+.chat-content-area::-webkit-scrollbar {
+  display: none;
+  /* 隐藏滚动条(Chrome) */
+}
+
+/* --- 欢迎态 --- */
+.gpt-welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 70vh;
+  color: #333;
+}
+
+.gpt-welcome h2 {
+  margin-top: 20px;
+  font-weight: 600;
+}
+
+/* --- 消息流 (GPT 风格) --- */
+.gpt-message-row {
+  display: flex;
+  padding: 20px 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  /* 极淡的分隔线 */
+}
+
+/* AI 的背景稍微不一样一点，或者保持全白 */
+.gpt-message-row.ai {
+  background-color: #f7f7f8;
+}
+
+.gpt-avatar {
+  margin-right: 16px;
+  flex-shrink: 0;
+}
+
+.gpt-message-content {
+  flex: 1;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #374151;
+}
+
+.gpt-name {
+  font-weight: bold;
+  font-size: 13px;
+  margin-bottom: 5px;
+  color: #000;
+}
+
+.gpt-text {
+  white-space: pre-wrap;
+  /* 保留换行 */
+}
+
+/* --- 底部输入区 (核心) --- */
+.gpt-footer {
+  flex-shrink: 0;
+  padding: 0 20px 20px 20px;
+  background: #fff;
+  /* 遮住后面的内容 */
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #fff 20%);
+  /* 渐变遮罩效果 */
+}
+
+.gpt-input-wrapper {
+  position: relative;
+  border: 1px solid #e5e5e5;
+  border-radius: 16px;
+  /* 大圆角 */
+  background-color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: flex-end;
+  /* 按钮沉底 */
+  padding: 8px 10px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.gpt-input-wrapper:focus-within {
+  border-color: #d9d9d9;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 改造 Antd 的 TextArea */
+.gpt-textarea {
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  resize: none !important;
+  padding: 8px 40px 8px 10px !important;
+  /* 右边给按钮留位置 */
+  font-size: 16px;
+  max-height: 200px;
+}
+
+.gpt-textarea:focus {
+  box-shadow: none !important;
+}
+
+/* 发送按钮 */
+.gpt-send-btn {
+  background-color: #e5e5e5;
+  /* 默认灰色 */
+  color: #fff;
+  border: none;
+  margin-bottom: 4px;
+  /* 对齐 */
+  transition: all 0.3s;
+}
+
+/* 激活状态的按钮 (黑色) */
+.gpt-send-btn.active {
+  background-color: #000;
+  color: #fff;
+}
+
+.gpt-send-btn.active:hover {
+  background-color: #333;
+}
+
+.gpt-footer-tip {
+  text-align: center;
+  font-size: 12px;
+  color: #999;
+  margin-top: 8px;
+}
+
+/* --- 1. 修改底部输入区：改为固定定位 --- */
+.gpt-footer {
+  /* 核心修改：使用 fixed 定位 */
+  position: fixed;
+  bottom: 50px;
+  /* 距离屏幕底部 50px */
+
+  /* 居中处理 (因为 fixed 是相对于屏幕的，不跟随父容器宽度，需要手动居中) */
+  left: 50%;
+  transform: translateX(-50%);
+
+  /* 宽度限制，保持和主容器一致 */
+  width: 100%;
+  max-width: 900px;
+
+  /* 其他样式保持不变 */
+  padding: 0 20px;
+  /* 去掉底部的 padding，因为用 bottom 控制了 */
+  z-index: 1000;
+  /* 保证浮在最上层 */
+
+  /* 背景渐变保留，防止文字在输入框下面穿帮 */
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #fff 40%);
+  pointer-events: none;
+  /* 让渐变区域不阻挡鼠标点击背后的内容 */
+}
+
+/* 恢复输入框的点击交互 */
+.gpt-input-wrapper {
+  pointer-events: auto;
+  /* 加上阴影让它悬浮感更强 */
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.gpt-footer-tip {
+  pointer-events: auto;
+}
+
+/* --- 2. 修改中间内容区：增加底部留白 --- */
+.chat-content-area {
+  flex: 1;
+  overflow-y: auto;
+
+  /* 核心修改：给底部增加巨大的 padding */
+  /* 计算公式：输入框高度(约60px) + 底部距离(50px) + 额外缓冲(20px) */
+  padding: 20px 0 130px 0;
+
+  scrollbar-width: none;
+}

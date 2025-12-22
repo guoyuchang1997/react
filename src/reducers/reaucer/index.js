@@ -19,7 +19,6 @@ const initialState = [
 ]
 
 export const todos = (state = initialState, action) => {
-    console.log(state, action);
     switch (action.type) {
         case 'add_false':
             return state.filter(item => item.id !== action.value)

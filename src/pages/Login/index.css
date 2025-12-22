@@ -1,0 +1,212 @@
+/* 全屏容器 */
+.login-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: #f3f4f6;
+  /* 浅灰底色 */
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* --- 动态光斑背景 --- */
+.ambient-light {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  /* 巨大的模糊营造氛围 */
+  opacity: 0.6;
+  animation: float 10s infinite ease-in-out;
+  z-index: 0;
+}
+
+.light-1 {
+  width: 500px;
+  height: 500px;
+  background: #60a5fa;
+  /* 蓝色 */
+  top: -100px;
+  left: -100px;
+  animation-delay: 0s;
+}
+
+.light-2 {
+  width: 400px;
+  height: 400px;
+  background: #c084fc;
+  /* 紫色 */
+  bottom: -50px;
+  right: -50px;
+  animation-delay: -2s;
+}
+
+.light-3 {
+  width: 300px;
+  height: 300px;
+  background: #2dd4bf;
+  /* 青色 */
+  bottom: 20%;
+  left: 20%;
+  opacity: 0.4;
+  animation-delay: -4s;
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(30px, -30px) scale(1.1);
+  }
+}
+
+/* --- 玻璃卡片 --- */
+.glass-card {
+  position: relative;
+  z-index: 10;
+  width: 900px;
+  height: 550px;
+  background: rgba(255, 255, 255, 0.7);
+  /* 半透明白 */
+  backdrop-filter: blur(20px);
+  /* 核心：磨砂效果 */
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 24px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  overflow: hidden;
+}
+
+/* 左侧品牌区 */
+.card-left {
+  flex: 1;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(147, 51, 234, 0.1) 100%);
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+
+/* 加一点纹理让左侧不那么单调 */
+.card-left::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: radial-gradient(#3b82f6 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.1;
+}
+
+.brand-title {
+  font-size: 32px;
+  font-weight: 800;
+  color: #1f2937;
+  margin-bottom: 16px;
+  letter-spacing: -1px;
+}
+
+.brand-slogan {
+  font-size: 16px;
+  color: #4b5563;
+  line-height: 1.6;
+}
+
+.copyright {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+/* 右侧表单区 */
+.card-right {
+  flex: 1;
+  padding: 60px;
+  background: rgba(255, 255, 255, 0.4);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.form-header h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+.form-header p {
+  color: #6b7280;
+  margin-bottom: 32px;
+}
+
+/* 自定义输入框样式 */
+.custom-input {
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid #e5e7eb;
+  transition: all 0.3s;
+}
+
+.custom-input:hover,
+.custom-input:focus {
+  background: #fff;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.forgot-link {
+  color: #3b82f6;
+  font-weight: 500;
+}
+
+/* 提交按钮 */
+.submit-btn {
+  height: 48px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 16px;
+  background: linear-gradient(to right, #2563eb, #4f46e5);
+  border: none;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.submit-btn:hover {
+  background: linear-gradient(to right, #1d4ed8, #4338ca) !important;
+  transform: translateY(-1px);
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+  .glass-card {
+    width: 90%;
+    height: auto;
+    flex-direction: column;
+  }
+
+  .card-left {
+    display: none;
+    /* 手机上隐藏左侧 */
+  }
+
+  .card-right {
+    padding: 40px 24px;
+  }
+}

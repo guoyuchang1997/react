@@ -100,7 +100,8 @@ function getModuleStore<E extends object>(moduleName: string) {
 /** 数据存储 */
 export const Store = {
   /** 页头 */
-  Head: getModuleStore<IHome['IHead']>('IHead.IStore')
+  Head: getModuleStore<IHome['IHead']>('IHead.IStore'),
+  Theme: getModuleStore<IHome['ITheme']>('ITheme')
 }
 {/* //@ts-ignore
 window._Store = Store; */}

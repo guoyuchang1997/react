@@ -41,9 +41,9 @@ const MyComponent: React.FC = () => {
     }
   };
 
-  useEffect(() => {
-    fetchList();
-  }, []);
+  // useEffect(() => {
+  //   fetchList();
+  // }, []);
 
   /** ✅ 搜索 */
   const handleSearch = () => {

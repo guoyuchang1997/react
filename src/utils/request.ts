@@ -32,8 +32,8 @@ service.interceptors.response.use(
     const res = response.data;
 
     // 假设你的后端返回结构是: { code: 200, result: ..., model_used: ... }
-    // 之前你的判断是 res.status_code !== 1，这会导致报错
-    if (res.status === 200 ) {
+    // 之前你的判断是 res.code_code !== 1，这会导致报错
+    if (res.code === 200 ) {
        return res; // ✅ 校验通过，返回数据
     }
     
@@ -44,8 +44,8 @@ service.interceptors.response.use(
   (error) => {
     // ... 这里的错误处理逻辑保持不变 ...
     if (error.response) {
-       // ... status code switch case ...
-       console.error('HTTP Error', error.response.status);
+       // ... code code switch case ...
+       console.error('HTTP Error', error.response.code);
     }
     return Promise.reject(error);
   }

@@ -6,10 +6,8 @@ module.exports = function (app) {
   app.use(
     '/api',
     createProxyMiddleware({
-      target: 'http://127.0.0.1:8000',
+      target: 'http://127.0.0.1:8001',
       changeOrigin: true,
-
-      // 2. 关键配置：把被剥离的 '/api' 重新拼回去！
       pathRewrite: {
         // 含义：匹配路径开头的 '/'，替换为 '/api/'
         '^/': '/api/',

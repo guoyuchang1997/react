@@ -11,3 +11,15 @@ export const updateUser = (data: any) =>
 
 export const deleteUser = (id: string) =>
   request.post('/api/user/delete', { id }).then(res => res.data);
+export const getDouTop = (limit: number) =>
+  request
+    .get('/api/v1/movies/list', {
+      params: { limit }
+    })
+    .then(res => res.data);
+export const generateAI = (params: any) =>
+  request
+    .post<any>('/api/v1/ai/generate', params)
+    .then((res) => res.data);
+export const getTaskStatus = () => 
+  request.get(`/api/v1/ai/tasks`).then(res => res.data);
