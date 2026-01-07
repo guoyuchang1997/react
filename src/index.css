@@ -8,7 +8,6 @@
 /* 深色模式覆盖 */
 [data-theme='dark'] {
   --bg-color: #121212;
-  /* GPT 深色背景 */
   --text-color: #ececec;
   --sider-bg: #1a1a1a;
 }

@@ -1,11 +1,11 @@
 // src/pages/Layout/index.js
 import React, { useEffect, useState, useMemo } from 'react';
-import { Layout, Tabs, Avatar, Dropdown, theme } from 'antd'; // 引入 theme
+import { Layout, Tabs, Avatar, Dropdown } from 'antd';
 import {
   UserOutlined,
   ThunderboltFilled,
   LogoutOutlined,
-  BgColorsOutlined, // 外观图标
+  BgColorsOutlined,
   SunOutlined,
   MoonOutlined,
   DesktopOutlined
@@ -13,20 +13,16 @@ import {
 import { Route, Switch, useHistory, useLocation, Redirect } from "react-router-dom";
 import './LayoutPage.css';
 import { routeConfig } from '../../router/config';
-
-// 引入 Store 用于状态管理
-import { Store } from '../../store/home';
+import { useTheme } from '../../theme';
 
 const { Content } = Layout;
 
 const LayoutPage = () => {
   const history = useHistory();
   const location = useLocation();
-  const { token } = theme.useToken(); // 获取当前主题 token 用于样式微调
 
-  // 1. 获取当前的主题模式 (用于在菜单里显示哪个被选中了)
-  // 第二个参数是默认值
-  const [mode] = Store.Theme.use('mode', 'system');
+  // 使用新的主题 hook
+  const { mode, setMode } = useTheme();
 
   const [activeTab, setActiveTab] = useState(routeConfig[0].path);
 
@@ -57,7 +53,7 @@ const LayoutPage = () => {
   const handleMenuClick = ({ key }) => {
     // 判断点击的是否是主题相关的 key
     if (['light', 'dark', 'system'].includes(key)) {
-      Store.Theme.update('mode', key); // 更新全局 Zustand 状态
+      setMode(key); // 使用新的主题系统
     }
     else if (key === 'logout') {
       // 处理退出登录逻辑

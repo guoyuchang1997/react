@@ -10,7 +10,7 @@ import {
   CommentOutlined,
   BgColorsOutlined
 } from '@ant-design/icons';
-import { generateAI } from '../../api/user';
+import { generateChat } from '../../api/user';
 import './index.css';
 
 const { Text } = Typography;
@@ -62,7 +62,7 @@ const AiStudio: React.FC = () => {
     }
 
     try {
-      const res = await generateAI({
+      const res = await generateChat({
         task_type: activeTab,
         prompt: prompt,
         ref_image_url: refUrl,
@@ -150,7 +150,7 @@ const AiStudio: React.FC = () => {
   return (
     <div className="gpt-layout">
       {/* 顶部简单的 Tabs */}
-      <div className="gpt-header">
+      {/* <div className="gpt-header">
         <Tabs
           activeKey={activeTab}
           onChange={setActiveTab}
@@ -158,7 +158,7 @@ const AiStudio: React.FC = () => {
           centered
           className="gpt-tabs"
         />
-      </div>
+      </div> */}
 
       {/* 中间内容区域 (自适应高度) */}
       <div className="gpt-workspace">

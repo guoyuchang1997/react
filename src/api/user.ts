@@ -21,5 +21,9 @@ export const generateAI = (params: any) =>
   request
     .post<any>('/api/v1/ai/generate', params)
     .then((res) => res.data);
+export const generateChat = (params: any) =>
+  request
+    .post<any>('/api/v1/ai/chat', params)
+    .then((res) => res.data);
 export const getTaskStatus = () => 
   request.get(`/api/v1/ai/tasks`).then(res => res.data);

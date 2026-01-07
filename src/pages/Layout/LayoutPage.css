@@ -2,16 +2,13 @@
 
 :root {
   --nav-height: 64px;
-  --bg-color: #ffffff;
-  --tab-active-color: #000000;
-  --tab-text-color: #666666;
 }
 
 /* 1. 整体布局背景 */
 .layout-container {
-  background: #fff !important;
-  /* 全白背景更显干净 */
+  background: var(--theme-layoutBg, #fff) !important;
   min-height: 100vh;
+  transition: var(--theme-transition);
 }
 
 /* 2. 顶部导航栏：核心设计 */
@@ -21,59 +18,47 @@
   z-index: 100;
   width: 100%;
   height: var(--nav-height);
-  background: rgba(255, 255, 255, 0.8);
-  /* 半透明白 */
+  background: var(--theme-headerBg, rgba(255, 255, 255, 0.8));
   backdrop-filter: blur(12px);
-  /* 磨砂玻璃效果 */
   -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-  /* 极淡的分割线 */
+  border-bottom: 1px solid var(--theme-headerBorder, rgba(0, 0, 0, 0.06));
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 40px;
-  /* 宽敞的左右间距 */
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+  transition: var(--theme-transition);
 }
 
-
 /* 3. 魔改 Antd Tabs */
-/* 去掉默认的灰色条条框框，只留文字 */
 .custom-tabs .ant-tabs-nav {
   margin-bottom: 0 !important;
-  /* 去掉 Tabs 默认下间距 */
 }
 
 .custom-tabs .ant-tabs-nav::before {
   border-bottom: none !important;
-  /* 去掉那条灰色的横线 */
 }
 
 .custom-tabs .ant-tabs-tab {
   padding: 20px 0 !important;
-  /* 增加点击区域高度 */
   margin: 0 24px !important;
-  /* Tab 之间的间距加大 */
   font-size: 15px;
-  color: var(--tab-text-color);
-  transition: color 0.3s;
+  color: var(--theme-tabText, #666);
+  transition: var(--theme-transition);
 }
 
 .custom-tabs .ant-tabs-tab:hover {
-  color: #000;
+  color: var(--theme-tabHover, #000);
 }
 
-/* 选中状态 */
 .custom-tabs .ant-tabs-tab-active .ant-tabs-tab-btn {
-  color: var(--tab-active-color) !important;
+  color: var(--theme-tabActive, #000) !important;
   font-weight: 600;
   text-shadow: none !important;
-  /* 去掉 Antd 默认的加粗抖动 */
 }
 
-/* 底部那个蓝色游标改成黑色或你的主题色 */
 .custom-tabs .ant-tabs-ink-bar {
-  background: #000 !important;
+  background: var(--theme-tabInkBar, #000) !important;
   height: 2px !important;
   border-radius: 2px;
 }
@@ -81,7 +66,6 @@
 /* 4. 内容区域 */
 .content-wrapper {
   max-width: 1200px;
-  /* 限制最大宽度，防止在大屏上太散 */
   margin: 0 auto;
   padding: 32px 40px;
   animation: fadeIn 0.4s ease-in-out;
@@ -109,12 +93,10 @@
   justify-content: center;
 }
 
-/* 鼠标放上去时，头像周围出现浅灰色的圈 (类似 Google) */
 .avatar-wrapper:hover {
   background: rgba(0, 0, 0, 0.06);
 }
 
-/* 深色模式下的悬停适配 */
 [data-theme='dark'] .avatar-wrapper:hover {
   background: rgba(255, 255, 255, 0.1);
 }

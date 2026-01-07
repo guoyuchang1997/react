@@ -1,0 +1,66 @@
+/**
+ * 主题 CSS 变量
+ * 这些变量由 ThemeProvider 动态设置
+ */
+
+/* 根元素样式 */
+:root {
+  /* 所有主题变量由 JS 动态注入，格式为 --theme-{key} */
+  /* 例如: --theme-bg, --theme-text, --theme-border 等 */
+
+  /* 过渡动画 */
+  --theme-transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* 全局样式应用 */
+body {
+  background-color: var(--theme-bg, #fff);
+  color: var(--theme-text, #333);
+  transition: var(--theme-transition);
+}
+
+/* 滚动条样式（深色模式优化） */
+[data-theme='dark'] ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+[data-theme='dark'] ::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+[data-theme='dark'] ::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+
+[data-theme='dark'] ::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Ant Design 组件覆盖 */
+[data-theme='dark'] .ant-dropdown {
+  background: #1a1a1a !important;
+  border: 1px solid #333 !important;
+}
+
+[data-theme='dark'] .ant-dropdown-menu {
+  background: #1a1a1a !important;
+  color: #ececec !important;
+}
+
+[data-theme='dark'] .ant-dropdown-menu-item {
+  color: #ececec !important;
+}
+
+[data-theme='dark'] .ant-dropdown-menu-item:hover {
+  background: #333 !important;
+}
+
+[data-theme='dark'] .ant-dropdown-menu-item-selected {
+  background: #333 !important;
+}
+
+[data-theme='dark'] .ant-dropdown-menu-item-divider {
+  background: #333 !important;
+}
